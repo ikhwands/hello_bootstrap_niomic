@@ -20,18 +20,73 @@ import {
   Figure,
   Jumbotron,
   ListGroup,
-  Modal
+  Modal,
+  Nav,
+  Navbar,
+  OverlayTrigger,
+  Popover,
+  Pagination,
+  ProgressBar,
+  Table,
+  Tabs,
+  Tab,
+  Collapse
 } from "react-bootstrap";
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      buka: true
+    }
+  }
   render() {
+
+    const munculPopover = <Popover title="informasi">Selamat Kamu Berhasil</Popover>;
+
     return (
       <Container>
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="/">Menu</Navbar.Brand>
+          <Nav>
+            <Nav.Item>
+              <Nav.Link href="/">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/">Contact</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/">Info</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="silahkan cari" />
+            <Button variant="outline-info">Search</Button>
+          </Form>
+
+        </Navbar>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/">Info</Breadcrumb.Item>
         </Breadcrumb>
+        <br />
+        <br />
+
+
+        <Tabs defaultActiveKey="info">
+          <Tab eventKey="Home" title="Home">
+            <p>Contoh Halmana Home</p>
+          </Tab>
+
+          <Tab eventKey="info" title="info">
+            <p>Contoh Halmana info</p>
+          </Tab>
+        </Tabs>
+
+
+
+
 
         <Carousel>
           <Carousel.Item>
@@ -267,8 +322,72 @@ class App extends Component {
               </Modal.Footer>
             </Modal.Dialog>
           </Col>
-          <Col>Kolom3</Col>
+          <Col>
+
+            <OverlayTrigger
+              trigger="click"
+              placement="right"
+              overlay={munculPopover}
+            >
+              <Button variant="success">Munculkan Overlay</Button>
+            </OverlayTrigger>
+            <br />
+            <br />
+            <Pagination size="sm">
+              <Pagination.Item>1</Pagination.Item>
+              <Pagination.Item>2</Pagination.Item>
+              <Pagination.Item active>3</Pagination.Item>
+              <Pagination.Item>4</Pagination.Item>
+            </Pagination>
+            <br />
+            <br />
+
+            <ProgressBar now={75} label="75%" />
+
+          </Col>
         </Row>
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Nama</th>
+              <th>Menu</th>
+              <th>Harga</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>dian</td>
+              <td>sate</td>
+              <td>20000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Aris</td>
+              <td>Soto</td>
+              <td>200000</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Aris</td>
+              <td>Soto</td>
+              <td>200000</td>
+            </tr>
+          </tbody>
+        </Table>
+
+        <Button
+          variant="primary"
+          onClick={() => this.setState({ buka: !this.state.buka })}
+        >
+          Tampilkan
+        </Button>
+        <Collapse in={this.state.buka}>
+          <p>Menampilkan pesan sesuai permintaan</p>
+        </Collapse>
+
       </Container>
     )
   }
